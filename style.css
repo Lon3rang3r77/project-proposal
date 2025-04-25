@@ -1,0 +1,115 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  position: relative; /* Needed for pseudo-element positioning */
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Ensures blur doesn't leak outside */
+}
+
+/* Blurred background (pseudo-element) */
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("./assets/propos.jpg") center center no-repeat;
+  background-size: 50% 100%; /* Match your custom width/height */
+  filter: blur(1.5px); /* Adjust blur intensity (e.g., 3px to 8px) */
+  z-index: -1; /* Place behind content */
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Modal overlay background */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* black with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login card styled like a modal */
+.login-card {
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 300px;
+  z-index: 2;
+}
+
+.sensitive {
+  font-size: 12px;
+  text-align: left;
+  margin-top: -10px;
+}
+
+.icon {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+.email {
+  font-weight: 200;
+  margin: 10px 0;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: gray 1px solid;
+  outline: none;
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-bottom: gray 1px solid;
+  outline: none;
+}
+
+.note {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
