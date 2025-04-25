@@ -21,7 +21,7 @@ function validateEmail(email) {
 }
 
 function validatePassword(password) {
-  const pattern = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
+  const pattern = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return pattern.test(password);
 }
 
